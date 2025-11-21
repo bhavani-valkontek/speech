@@ -1,5 +1,6 @@
 streamlit
-transformers
+transformers>=4.42.2
 torch
 gTTS
 streamlit-extras
+
