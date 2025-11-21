@@ -10,8 +10,9 @@ MODEL_NAME = "babbilibhavani/nllb-translator"  # <-- Replace with your Hugging F
 @st.cache_resource
 def load_model():
     tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_fast=True)
-    model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
+    model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME,from_pt=True)
     return tokenizer, model
+
 
 tokenizer, model = load_model()
 
