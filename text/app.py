@@ -105,16 +105,18 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 from gtts import gTTS
 from streamlit_extras.stylable_container import stylable_container
 import base64
+import os
 
 # -----------------------------
-# Load model from Hugging Face
+# Hugging Face model
 # -----------------------------
-MODEL_NAME = "your-username/nllb-translator"  # Replace with your HF repo
+MODEL_NAME = "babbilibhavani/nllb-translator"  # Replace with your HF repo
+HF_TOKEN = os.environ.get("HF_TOKEN")
 
 @st.cache_resource
 def load_model():
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_fast=True)
-    model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME, use_fast=True, use_auth_token=HF_TOKEN)
+    model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME, use_auth_token=HF_TOKEN)
     return tokenizer, model
 
 tokenizer, model = load_model()
@@ -186,7 +188,6 @@ if st.button("Translate") and text_input.strip():
 if "translated_text" in st.session_state:
     st.text_area("Translated Text", st.session_state["translated_text"], height=150)
 
-    # PLAY BUTTON WITHOUT REFRESH
     with stylable_container(
         key="play_button",
         css_styles="""
@@ -205,4 +206,5 @@ if "translated_text" in st.session_state:
                 </audio>
             """
             st.markdown(audio_html, unsafe_allow_html=True)
+
 
