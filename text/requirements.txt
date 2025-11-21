@@ -1,6 +1,5 @@
-streamlit
+streamlit==1.26.0
 transformers>=4.42.2
-torch
-gTTS
-streamlit-extras
-
+torch>=2.0.0
+gTTS==2.3.2
+streamlit-extras==0.0.14
